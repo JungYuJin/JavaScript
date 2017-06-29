@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> JavaScript 로또 번호 생성기 </title>
+  </head>
+  <body>
+      <script>
+        var lottoNum = []; // 1~45 숫자가 들어갈 배열1
+        var myLottoNum = []; // 6 숫자가 들어갈 배열2
+
+        // 1~45 로또 번호를 만들자.
+        for(var i = 1; i < 46; i++){
+            lottoNum.push(i);
+        }
+
+
+
+        // Math.floor (정수로 하기위해 소수점 버리기), Math.random(난수)
+        for (var j = 1; j < 999; j++){
+            var randomNum = Math.floor(Math.random()* lottoNum.length) + 1;
+            //indexof (myLottoNum 에서 randomNum 을 찾음 없으면 -1 반환 > 그 수를 넣어줌)
+            if(myLottoNum.indexOf(randomNum) == -1){
+                myLottoNum.push(randomNum);
+            }
+            if(myLottoNum.length == 6){
+                break;
+            }
+        }
+        // 정렬하라고 말씀하셔서 sort를 사용함 (sort의 디폴트는 숫자도 문자로 인식)
+        function sortNum(a,b){
+            return a-b;
+        }
+        /*  위와 같은 - 굳이 sortNum을 사용하지 않아도 된다.
+        1. myLottoNum.sort(function(a, b) {return a - b;});
+
+        2. myLottoNum.sort((a, b) => {return a - b; });
+        */
+
+        myLottoNum.sort(sortNum);
+
+        document.write("로또 번호: " + myLottoNum);
+        console.log(myLottoNum);
+      </script>
+  </body>
+</html>
